@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import { LoginModel } from '../../models/LoginModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BasePage } from '../../estruturaBase/BasePage';
+import { CadastrarUsuarioPage } from '../cadastrar-usuario/cadastrar-usuario';
 
 @IonicPage()
 @Component({
@@ -32,7 +33,7 @@ export class LoginPage extends BasePage{
 
     }
 
-  ionViewDidLoad() {
+  ionViewDidLoad(): void{
     console.log('ionViewDidLoad LoginPage');
   }
 
@@ -44,6 +45,10 @@ export class LoginPage extends BasePage{
     }
     
     //TODO: handle user login
+  }
+
+  cadastrarUsuario(): void{
+    this.navCtrl.setRoot(CadastrarUsuarioPage, {}, {animate: true, direction: 'forward'});
   }
 
 }

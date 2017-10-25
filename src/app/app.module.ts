@@ -9,9 +9,13 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { CadastrarUsuarioPage } from '../pages/cadastrar-usuario/cadastrar-usuario';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { UsuarioServiceProvider } from '../providers/usuario-service/usuario-service';
+import { InstituicaoServiceProvider } from '../providers/instituicao-service/instituicao-service';
+import { CursoServiceProvider } from '../providers/curso-service/curso-service';
 
 @NgModule({
   declarations: [
@@ -20,11 +24,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    CadastrarUsuarioPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -33,12 +39,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContactPage,
     HomePage,
     TabsPage,
-    LoginPage
+    LoginPage,
+    CadastrarUsuarioPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UsuarioServiceProvider,
+    InstituicaoServiceProvider,
+    CursoServiceProvider
   ]
 })
 export class AppModule {}

@@ -1,0 +1,103 @@
+<!--
+  Generated template for the CadastrarUsuarioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons left>
+
+      <button ion-button icon-only><!-- or your method, this is for closing a modal -->
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+ 
+    </ion-buttons>
+    <ion-title>Novo Usuário</ion-title>
+  </ion-toolbar>
+    
+</ion-header>
+
+
+<ion-content padding>
+    <ion-grid>
+        
+        <ion-row>
+          <ion-col col-12>
+            
+            <form [formGroup]="cadUserFrmGroup"  (ngSubmit)="cadastrarUsuario()">
+              
+              <ion-row>
+                <ion-col>
+                  <ion-list inset>
+                      <ion-item>
+                          <ion-label>Nome</ion-label>
+                          <ion-input type="text" name="nome" formControlName="nome" [(ngModel)]="userModel.nome"></ion-input>
+                        </ion-item>
+                      <p *ngIf="submitAttemp && !cadUserFrmGroup.controls.nome.valid" class="message-invalid">Informe o Nome corretamente</p>
+
+                      <ion-item>
+                        <ion-label>Telefone</ion-label>
+                        <ion-input type="text" name="telefone" formControlName="telefone" [(ngModel)]="userModel.telefone"></ion-input>
+                      </ion-item>
+                      <p *ngIf="submitAttemp && !cadUserFrmGroup.controls.telefone.valid" class="message-invalid">Informe o Telefone corretamente</p>
+
+                      <ion-item>
+                        <ion-label>E-mail</ion-label>
+                        <ion-input type="text" name="email" formControlName="email" [(ngModel)]="userModel.email"></ion-input>
+                      </ion-item>
+                      <p *ngIf="submitAttemp && !cadUserFrmGroup.controls.email.valid" class="message-invalid">Informe o E-mail corretamente</p>
+    
+                      <ion-item>
+                        <ion-label>Senha</ion-label>
+                        <ion-input type="password" name="senha" formControlName="senha" [(ngModel)]="userModel.senha"></ion-input>
+                      </ion-item>
+                      <p *ngIf="submitAttemp && !cadUserFrmGroup.controls.senha.valid" class="message-invalid">Informe a Senha corretamente</p>
+
+                      <ion-item>
+                        <ion-label class="item-select">Instituição</ion-label>
+                        <ion-select name="instituicao" formControlName="instituicao" interface="popover" [(ngModel)]="userModel.instituicao_id">
+                          <ion-option *ngFor="let instituicao of instituicoes" [value]="instituicao.id">{{instituicao.nome}}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <p *ngIf="submitAttemp && !cadUserFrmGroup.controls.instituicao.valid" class="message-invalid">Selecione a Instituição</p>
+
+                      <ion-item>
+                        <ion-label class="item-select">Curso</ion-label>
+                        <ion-select name="curso" formControlName="curso" interface="popover" [(ngModel)]="userModel.curso_id">
+                          <ion-option *ngFor="let curso of cursos" [value]="curso.id">{{curso.nome}}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                      <p *ngIf="submitAttemp && !cadUserFrmGroup.controls.curso.valid" class="message-invalid">Selecione o curso</p>
+  
+                  </ion-list>
+                </ion-col>
+              </ion-row>
+  
+              <ion-row>
+                <ion-col>
+                  <button type="submit" ion-button full icon-left color="secondary">
+                    <ion-icon name="person-add"></ion-icon>
+                    Cadastrar
+                  </button>
+                </ion-col>
+              </ion-row>
+  
+              <!-- <ion-row>
+                <ion-col>
+                  <button ion-button full icon-left color="primary" (click)="cadastrarUsuario()">
+                    <ion-icon name="person-add"></ion-icon>
+                    Cadastrar-se
+                  </button>
+                </ion-col>
+              </ion-row> -->
+  
+            </form>
+    
+          </ion-col>
+        </ion-row>
+    
+      </ion-grid>
+
+</ion-content>
