@@ -35,10 +35,11 @@ export class CadastrarUsuarioPage extends BasePage{
     private instituicaoService: InstituicaoServiceProvider,
     private cursoService: CursoServiceProvider,
     private usuarioService: UsuarioServiceProvider,
+    public alertCtrl: AlertController,
     public  formBuilder: FormBuilder,
     loadingCtrl: LoadingController
   ) {
-    super(loadingCtrl);
+    super(loadingCtrl, alertCtrl);
 
     this.userModel = new UserModel();
     this.cadUserFrmGroup = formBuilder.group({
@@ -61,9 +62,8 @@ export class CadastrarUsuarioPage extends BasePage{
   getInstituicoes(): void{
     this.instituicaoService.getAll().subscribe(resp => {
       this.instituicoes = resp;
-      console.log('inst', this.instituicoes);
     }, erro => {
-      console.log('erro instituicao', erro);
+      console.log('Institution', erro);
     });
   }
 
@@ -71,7 +71,7 @@ export class CadastrarUsuarioPage extends BasePage{
     this.cursoService.getAll().subscribe(resp => {
       this.cursos = resp;
     }, erro => {
-      console.log('erro curso', erro)
+      console.log('Course', erro)
     });
   }
 
@@ -82,10 +82,19 @@ export class CadastrarUsuarioPage extends BasePage{
     }
 
     this.usuarioService.cadastrarUsuario(this.userModel).subscribe(resp => {
+      this.showAlert('Novo Usuário!', 'Usuário cadastrado com sucesso.');
       console.log('cadastro usuario', resp);
     }, erro => {
-      console.log('erro cadastro', erro);
+      let response = JSON.parse(erro._body);
+      for(var key in response.errors){
+         let errorText =  response.errors[key].join('\n');
+         this.showAlert(response.message, errorText);
+      }
     })
-
   }
+
+  goBack(){
+    this.navCtrl.pop();
+  }
+
 }

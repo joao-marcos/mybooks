@@ -3,9 +3,11 @@ import { AlertController, LoadingController, Loading } from 'ionic-angular';
 export class BasePage{
     loadingCtrl: LoadingController;
     loading: Loading;
+    alertCtrl: AlertController;
 
-    constructor(loadingCtrl: LoadingController){
+    constructor(loadingCtrl: LoadingController, alertCtrl: AlertController){
         this.loadingCtrl = loadingCtrl;
+        this.alertCtrl = alertCtrl;
     }
 
     showLoading(msg: string, duracao: number = 0){
@@ -27,4 +29,15 @@ export class BasePage{
             this.loading.dismiss();
         }
     }
+
+    showAlert(title: string, subTitle: string){
+        let alert = this.alertCtrl.create({
+            title: title,
+            subTitle: subTitle,
+            buttons: ['OK']
+        });
+
+        alert.present();
+    }
+
 }

@@ -20,10 +20,11 @@ export class LoginPage extends BasePage{
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public  formBuilder: FormBuilder,
+    public formBuilder: FormBuilder,
+    public alertCtrl: AlertController,
     loadingCtrl: LoadingController
     ) {
-      super(loadingCtrl);
+      super(loadingCtrl, alertCtrl);
 
       this.loginModel = new LoginModel();
       this.loginFrmGroup = formBuilder.group({
@@ -48,7 +49,7 @@ export class LoginPage extends BasePage{
   }
 
   cadastrarUsuario(): void{
-    this.navCtrl.setRoot(CadastrarUsuarioPage, {}, {animate: true, direction: 'forward'});
+    this.navCtrl.push(CadastrarUsuarioPage, {}, {animate: true, direction: 'forward'});
   }
 
 }
