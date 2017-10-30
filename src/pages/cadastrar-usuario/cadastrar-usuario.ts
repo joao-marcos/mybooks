@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BasePage } from '../../estruturaBase/BasePage';
 import { UserModel } from '../../models/UserModel';
@@ -81,16 +81,25 @@ export class CadastrarUsuarioPage extends BasePage{
       return;
     }
 
+    this.showLoading('Carregando...');
+
     this.usuarioService.cadastrarUsuario(this.userModel).subscribe(resp => {
+      this.hideLoading();
       this.showAlert('Novo Usuário!', 'Usuário cadastrado com sucesso.');
-      console.log('cadastro usuario', resp);
-    }, erro => {
-      let response = JSON.parse(erro._body);
+      this.cleanForm();
+    }, error => {
+      this.hideLoading();
+      let response = JSON.parse(error._body);
       for(var key in response.errors){
-         let errorText =  response.errors[key].join('\n');
+         let errorText =  response.errors[key].join(' ');
          this.showAlert(response.message, errorText);
       }
     })
+  }
+
+  cleanForm(){
+    this.submitAttemp = false;
+    this.cadUserFrmGroup.reset();
   }
 
   goBack(){

@@ -19,7 +19,7 @@ export class InstituicaoServiceProvider {
   }
 
   getAll(): Observable<InstituicaoModel[]>{
-    return this.http.get(MyBooksConsts.BASE_URL + MyBooksConsts.Instituicao.GET, {})
+    return this.http.get(MyBooksConsts.BASE_URL + MyBooksConsts.INSTITUICAO.GET, {})
     .map(response => {
       let resp = response.json();
       

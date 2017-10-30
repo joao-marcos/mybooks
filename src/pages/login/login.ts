@@ -4,6 +4,8 @@ import { LoginModel } from '../../models/LoginModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BasePage } from '../../estruturaBase/BasePage';
 import { CadastrarUsuarioPage } from '../cadastrar-usuario/cadastrar-usuario';
+import { AutenticacaoServiceProvider } from '../../providers/autenticacao-service/autenticacao-service';
+import { TabsPage } from '../tabs/tabs';
 
 @IonicPage()
 @Component({
@@ -22,6 +24,7 @@ export class LoginPage extends BasePage{
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
+    public autenticacaoService: AutenticacaoServiceProvider,
     loadingCtrl: LoadingController
     ) {
       super(loadingCtrl, alertCtrl);
@@ -45,7 +48,24 @@ export class LoginPage extends BasePage{
       return;
     }
     
-    //TODO: handle user login
+    this.showLoading('Realizando Login...');
+    this.autenticacaoService.login(this.loginModel).subscribe(
+      response => {
+        this.hideLoading();
+        this.showAlert('Login realizado', 'ola');
+        this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'});
+      },
+      error => {
+        this.hideLoading();
+        let response = JSON.parse(error._body);
+        this.showAlert('Erro login', error);
+        for(var key in response.errors){
+           let errorText =  response.errors[key].join(' ');
+           this.showAlert(response.message, errorText);
+        }
+      }
+    )
+
   }
 
   cadastrarUsuario(): void{

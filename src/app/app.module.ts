@@ -16,6 +16,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { UsuarioServiceProvider } from '../providers/usuario-service/usuario-service';
 import { InstituicaoServiceProvider } from '../providers/instituicao-service/instituicao-service';
 import { CursoServiceProvider } from '../providers/curso-service/curso-service';
+import { AutenticacaoServiceProvider } from '../providers/autenticacao-service/autenticacao-service';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { CursoServiceProvider } from '../providers/curso-service/curso-service';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UsuarioServiceProvider,
     InstituicaoServiceProvider,
-    CursoServiceProvider
+    CursoServiceProvider,
+    AutenticacaoServiceProvider,
+    NativeStorage
   ]
 })
 export class AppModule {}

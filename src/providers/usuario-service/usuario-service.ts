@@ -29,7 +29,7 @@ export class UsuarioServiceProvider {
       curso_id: usuario.curso_id
     };
 
-    return this.http.post(MyBooksConsts.BASE_URL + MyBooksConsts.User.CAD, dadosRequisicao)
+    return this.http.post(MyBooksConsts.BASE_URL + MyBooksConsts.USER.CAD, dadosRequisicao)
     .map(response => {
       return response.json();
     });

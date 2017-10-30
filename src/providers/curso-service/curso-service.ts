@@ -19,7 +19,7 @@ export class CursoServiceProvider {
   }
 
   getAll(): Observable<CursoModel[]> {
-    return this.http.get(MyBooksConsts.BASE_URL + MyBooksConsts.Curso.GET, {})
+    return this.http.get(MyBooksConsts.BASE_URL + MyBooksConsts.CURSO.GET, {})
     .map(response => {
       let resp = response.json();
       
