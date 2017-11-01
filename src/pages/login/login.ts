@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { LoginModel } from '../../models/LoginModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BasePage } from '../../estruturaBase/BasePage';
@@ -52,7 +52,6 @@ export class LoginPage extends BasePage{
     this.autenticacaoService.login(this.loginModel).subscribe(
       response => {
         this.hideLoading();
-        this.showAlert('Login realizado', 'ola');
         this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'});
       },
       error => {

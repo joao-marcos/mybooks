@@ -4,12 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { BookPage } from '../pages/book/book';
+import { SearchPage } from '../pages/search/search';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { CadastrarUsuarioPage } from '../pages/cadastrar-usuario/cadastrar-usuario';
+import { LoanPage } from '../pages/loan/loan';
+import { ProfilePage } from '../pages/profile/profile';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,12 +24,14 @@ import { NativeStorage } from '@ionic-native/native-storage';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    BookPage,
+    SearchPage,
     HomePage,
     TabsPage,
     LoginPage,
-    CadastrarUsuarioPage
+    CadastrarUsuarioPage,
+    LoanPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -37,12 +41,14 @@ import { NativeStorage } from '@ionic-native/native-storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    BookPage,
+    SearchPage,
     HomePage,
     TabsPage,
     LoginPage,
-    CadastrarUsuarioPage
+    CadastrarUsuarioPage,
+    LoanPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,

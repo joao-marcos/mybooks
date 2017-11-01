@@ -28,7 +28,7 @@
                 <ion-list inset>
                   <ion-item>
                     <ion-label floating>E-mail</ion-label>
-                    <ion-input type="text" name="email" formControlName="email" [(ngModel)]="loginModel.email"></ion-input>
+                    <ion-input type="email" name="email" formControlName="email" [(ngModel)]="loginModel.email"></ion-input>
                   </ion-item>
                   <p *ngIf="submitAttemp && !loginFrmGroup.controls.email.valid" class="message-invalid">Informe o E-mail corretamente</p>
 
