@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 @Component({
   selector: 'page-book',
@@ -7,7 +7,20 @@ import { NavController } from 'ionic-angular';
 })
 export class BookPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(
+    public navCtrl: NavController, 
+    private modalCtrl: ModalController,
+  ) {
+
+  }
+
+  openModalCreateBook(){
+    const myModal = this.modalCtrl.create('ModalCreateBookPage');
+    myModal.present();
+
+    myModal.onDidDismiss((data) => {
+      console.log(data);
+    })
 
   }
 

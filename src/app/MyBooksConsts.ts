@@ -14,4 +14,8 @@ export class MyBooksConsts{
     static readonly INSTITUICAO = {
         GET: 'instituicao'
     }
+
+    static readonly BOOK = {
+        CREATE: 'livro'
+    }
 }
