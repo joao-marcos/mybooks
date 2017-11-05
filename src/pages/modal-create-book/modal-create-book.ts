@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController, ToastController, ActionSheetController, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BasePage } from '../../estruturaBase/BasePage';
 import { BookModel } from '../../models/BookModel';
 import { LivroServiceProvider } from '../../providers/livro-service/livro-service';
+import { Camera } from '@ionic-native/camera';
 
 
 @IonicPage()
@@ -16,17 +17,21 @@ export class ModalCreateBookPage extends BasePage{
   createBookFrmGroup: FormGroup;
   submitAttemp: boolean = false;
   bookModel: BookModel;
+  imageThumb: string;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
+    private camera: Camera,
     private viewCtrl: ViewController,
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     public livroService: LivroServiceProvider,
     public toastCtrl: ToastController,
+    public actionSheetCtrl: ActionSheetController,
+    public platform: Platform,
     loadingCtrl: LoadingController) {
-      super(loadingCtrl, alertCtrl);
+      super(loadingCtrl, alertCtrl, toastCtrl);
 
       this.bookModel = new BookModel();
       this.bookModel.disponivelParaEmprestimo = true;
@@ -37,6 +42,7 @@ export class ModalCreateBookPage extends BasePage{
         dataDaPublicacao: ['', Validators.compose([Validators.required])],
         descricao: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
         quantidadeDeExemplares: ['', Validators.compose([Validators.required])],
+        autor: ['', Validators.required],
         disponivelParaEmprestimo: ['', Validators.compose([Validators.required])],
       });
   }
@@ -54,19 +60,13 @@ export class ModalCreateBookPage extends BasePage{
 
     this.showLoading('Carregando...');
 
-    this.livroService.createBook(this.bookModel).subscribe(resp => {
+    this.livroService.createBook(this.bookModel, this.imageThumb).subscribe(resp => {
       this.hideLoading();
-      let toast = this.toastCtrl.create({
-        message: 'Livro cadastrado com sucesso!',
-        duration: 3000,
-        position: 'bottom'
-      });
-      toast.present();
+      this.showToast('Livro cadastrado com sucesso!');
 
-      const dataReturn = {
+      this.viewCtrl.dismiss({
         created: true
-      }
-      this.viewCtrl.dismiss(dataReturn);
+      });
 
     }, error => {
       this.hideLoading();
@@ -83,6 +83,49 @@ export class ModalCreateBookPage extends BasePage{
     })
   }
 
+  takePicture(sourceType){
+    this.camera.getPicture({
+      quality: 50,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: sourceType,
+      allowEdit: false,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: false,
+      targetWidth: 1000,
+      targetHeight: 1000
+    }).then(
+      (image) => {
+        this.imageThumb = image;        
+      },
+      (erro) => {
+        this.showToast(erro);
+      }
+    );
+  }
+
+  presentActionSheetThumb(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Selecionar Imagem',
+      buttons: [
+        {
+          text: 'Câmera',
+          icon: !this.platform.is('ios') ? 'camera' : null,
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+          }
+        },{
+          text: 'Galeria',
+          icon: !this.platform.is('ios') ? 'images' : null,
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.SAVEDPHOTOALBUM);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
   cleanForm(){
     this.submitAttemp = false;
     this.createBookFrmGroup.reset();
@@ -90,6 +133,10 @@ export class ModalCreateBookPage extends BasePage{
 
   closeModal(){
     this.viewCtrl.dismiss();
+  }
+
+  fileUpload(){
+
   }
 
 }

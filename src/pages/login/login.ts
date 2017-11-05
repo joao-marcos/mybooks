@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { LoginModel } from '../../models/LoginModel';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BasePage } from '../../estruturaBase/BasePage';
@@ -25,9 +25,10 @@ export class LoginPage extends BasePage{
     public formBuilder: FormBuilder,
     public alertCtrl: AlertController,
     public autenticacaoService: AutenticacaoServiceProvider,
+    public toastCtrl: ToastController,
     loadingCtrl: LoadingController
     ) {
-      super(loadingCtrl, alertCtrl);
+      super(loadingCtrl, alertCtrl, toastCtrl);
 
       this.loginModel = new LoginModel();
       this.loginFrmGroup = formBuilder.group({

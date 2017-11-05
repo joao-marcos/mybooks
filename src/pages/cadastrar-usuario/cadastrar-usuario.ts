@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BasePage } from '../../estruturaBase/BasePage';
 import { UserModel } from '../../models/UserModel';
@@ -37,9 +37,10 @@ export class CadastrarUsuarioPage extends BasePage{
     private usuarioService: UsuarioServiceProvider,
     public alertCtrl: AlertController,
     public  formBuilder: FormBuilder,
+    public toastCtrl: ToastController,
     loadingCtrl: LoadingController
   ) {
-    super(loadingCtrl, alertCtrl);
+    super(loadingCtrl, alertCtrl, toastCtrl);
 
     this.userModel = new UserModel();
     this.cadUserFrmGroup = formBuilder.group({

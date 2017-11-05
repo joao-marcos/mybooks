@@ -21,46 +21,62 @@
 
 <ion-content padding>
     <ion-col col-12>
+      <ion-row>
+        <ion-col>
+          <img [src]="imageThumb" *ngIf="imageThumb">
+          <h4 *ngIf="!imageThumb">Selecione uma imagem</h4>
+          <button ion-button (click)="presentActionSheetThumb()" full>Escolher Imagem</button>
+        </ion-col>
+      </ion-row>
+
       <form [formGroup]="createBookFrmGroup"  (ngSubmit)="createBook()">
         
         <ion-row>
           <ion-col>
             <ion-list inset>
-                <ion-item>
-                    <ion-label>Titulo</ion-label>
-                    <ion-input type="text" name="titulo" formControlName="titulo" [(ngModel)]="bookModel.titulo"></ion-input>
-                  </ion-item>
-                <p *ngIf="submitAttemp && !createBookFrmGroup.controls.titulo.valid" class="message-invalid">Informe o Titulo corretamente</p>
 
-                <ion-item>
-                  <ion-label>Editora</ion-label>
-                  <ion-input type="text" name="editora" formControlName="editora" [(ngModel)]="bookModel.editora"></ion-input>
-                </ion-item>
-                <p *ngIf="submitAttemp && !createBookFrmGroup.controls.editora.valid" class="message-invalid">Informe a Editora corretamente</p>
 
-                <ion-item>
-                  <ion-label>Data da Publicação</ion-label>
-                  <ion-datetime name="dataDaPublicacao" formControlName="dataDaPublicacao" [(ngModel)]="bookModel.dataDaPublicacao" displayFormat="DD/MM/YYYY"></ion-datetime>
+              <ion-item>
+                  <ion-label>Titulo:</ion-label>
+                  <ion-input type="text" name="titulo" formControlName="titulo" [(ngModel)]="bookModel.titulo"></ion-input>
                 </ion-item>
-                <p *ngIf="submitAttemp && !createBookFrmGroup.controls.dataDaPublicacao.valid" class="message-invalid">Informe a Data corretamente corretamente</p>
+              <p *ngIf="submitAttemp && !createBookFrmGroup.controls.titulo.valid" class="message-invalid">Informe o Titulo corretamente</p>
 
-                <ion-item>
-                  <ion-label>Descrição</ion-label>
-                  <ion-input type="text" name="descricao" formControlName="descricao" [(ngModel)]="bookModel.descricao"></ion-input>
-                </ion-item>
-                <p *ngIf="submitAttemp && !createBookFrmGroup.controls.descricao.valid" class="message-invalid">Informe a Descrição corretamente</p>
+              <ion-item>
+                <ion-label>Editora:</ion-label>
+                <ion-input type="text" name="editora" formControlName="editora" [(ngModel)]="bookModel.editora"></ion-input>
+              </ion-item>
+              <p *ngIf="submitAttemp && !createBookFrmGroup.controls.editora.valid" class="message-invalid">Informe a Editora corretamente</p>
 
-                <ion-item>
-                  <ion-label>Quantidade de Exemplares</ion-label>
-                  <ion-input type="number" name="quantidadeDeExemplares" formControlName="quantidadeDeExemplares" [(ngModel)]="bookModel.quantidadeDeExemplares"></ion-input>
-                </ion-item>
-                <p *ngIf="submitAttemp && !createBookFrmGroup.controls.quantidadeDeExemplares.valid" class="message-invalid">Informe a Quantidade corretamente</p>
+              <ion-item>
+                <ion-label>Data da Publicação:</ion-label>
+                <ion-datetime name="dataDaPublicacao" formControlName="dataDaPublicacao" [(ngModel)]="bookModel.dataDaPublicacao" displayFormat="DD/MM/YYYY"></ion-datetime>
+              </ion-item>
+              <p *ngIf="submitAttemp && !createBookFrmGroup.controls.dataDaPublicacao.valid" class="message-invalid">Informe a Data corretamente corretamente</p>
 
-                <ion-item>
-                  <ion-label>Disponível para Empréstimo</ion-label>
-                  <ion-checkbox name="disponivelParaEmprestimo" formControlName="disponivelParaEmprestimo" [(ngModel)]="bookModel.disponivelParaEmprestimo"></ion-checkbox>
-                </ion-item>
-                  <p *ngIf="submitAttemp && !createBookFrmGroup.controls.disponivelParaEmprestimo.valid" class="message-invalid">Informe a Diponibilidade</p>
+              <ion-item>
+                <ion-label>Descrição:</ion-label>
+                <ion-input type="text" name="descricao" formControlName="descricao" [(ngModel)]="bookModel.descricao"></ion-input>
+              </ion-item>
+              <p *ngIf="submitAttemp && !createBookFrmGroup.controls.descricao.valid" class="message-invalid">Informe a Descrição corretamente</p>
+
+              <ion-item>
+                <ion-label>Quantidade de Exemplares:</ion-label>
+                <ion-input type="number" name="quantidadeDeExemplares" formControlName="quantidadeDeExemplares" [(ngModel)]="bookModel.quantidadeDeExemplares"></ion-input>
+              </ion-item>
+              <p *ngIf="submitAttemp && !createBookFrmGroup.controls.quantidadeDeExemplares.valid" class="message-invalid">Informe a Quantidade corretamente</p>
+
+              <ion-item>
+                <ion-label>Autor:</ion-label>
+                <ion-input type="text" name="autor" formControlName="autor" [(ngModel)]="bookModel.autor"></ion-input>
+              </ion-item>
+              <p *ngIf="submitAttemp && !createBookFrmGroup.controls.autor.valid" class="message-invalid">Informe o Autor corretamente</p>
+
+              <ion-item>
+                <ion-label>Disponível para empréstimo:</ion-label>
+                <ion-checkbox name="disponivelParaEmprestimo" formControlName="disponivelParaEmprestimo" [(ngModel)]="bookModel.disponivelParaEmprestimo"></ion-checkbox>
+              </ion-item>
+              <p *ngIf="submitAttemp && !createBookFrmGroup.controls.disponivelParaEmprestimo.valid" class="message-invalid">Informe a Diponibilidade</p>
 
             </ion-list>
           </ion-col>

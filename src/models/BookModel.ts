@@ -4,5 +4,7 @@ export class BookModel{
     dataDaPublicacao: string;
     descricao: string;
     quantidadeDeExemplares: number;
+    autor: string;
+    thumb: string;
     disponivelParaEmprestimo: boolean;
 }

@@ -15,6 +15,9 @@ import { ProfilePage } from '../pages/profile/profile';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer';
+
 import { UsuarioServiceProvider } from '../providers/usuario-service/usuario-service';
 import { InstituicaoServiceProvider } from '../providers/instituicao-service/instituicao-service';
 import { CursoServiceProvider } from '../providers/curso-service/curso-service';
@@ -61,7 +64,9 @@ import { LivroServiceProvider } from '../providers/livro-service/livro-service';
     AutenticacaoServiceProvider,
     NativeStorage,
     LivroServiceProvider,
-    LivroServiceProvider
+    LivroServiceProvider,
+    Camera,
+    FileTransfer
   ]
 })
 export class AppModule {}

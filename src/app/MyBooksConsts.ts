@@ -16,6 +16,7 @@ export class MyBooksConsts{
     }
 
     static readonly BOOK = {
-        CREATE: 'livro'
+        CREATE: 'livro',
+        UPLOAD_THUMB: 'livro/upload-thumb'
     }
 }

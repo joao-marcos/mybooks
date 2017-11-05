@@ -1,13 +1,15 @@
-import { AlertController, LoadingController, Loading } from 'ionic-angular';
+import { AlertController, LoadingController, Loading, ToastController } from 'ionic-angular';
 
 export class BasePage{
     loadingCtrl: LoadingController;
     loading: Loading;
     alertCtrl: AlertController;
+    toastCtrl: ToastController;
 
-    constructor(loadingCtrl: LoadingController, alertCtrl: AlertController){
+    constructor(loadingCtrl: LoadingController, alertCtrl: AlertController, toastCtrl: ToastController){
         this.loadingCtrl = loadingCtrl;
         this.alertCtrl = alertCtrl;
+        this.toastCtrl = toastCtrl;
     }
 
     showLoading(msg: string, duracao: number = 0){
@@ -38,6 +40,15 @@ export class BasePage{
         });
 
         alert.present();
+    }
+
+    showToast(message: string, duration: number = null, position: string = null){
+        let toast = this.toastCtrl.create({
+            message: message,
+            duration: (duration == null) ? 3000 : duration,
+            position: (position == null) ? 'bottom' : position
+          });
+          toast.present();
     }
 
 }
