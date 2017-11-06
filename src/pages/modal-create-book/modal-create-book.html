@@ -24,8 +24,9 @@
       <ion-row>
         <ion-col>
           <img [src]="imageThumb" *ngIf="imageThumb">
-          <h4 *ngIf="!imageThumb">Selecione uma imagem</h4>
+          <h5 *ngIf="!imageThumb">Selecione uma imagem</h5>
           <button ion-button (click)="presentActionSheetThumb()" full>Escolher Imagem</button>
+          <p *ngIf="submitAttemp && !imageThumb" class="message-invalid">Escolha uma Imagem</p>
         </ion-col>
       </ion-row>
 
@@ -59,12 +60,6 @@
                 <ion-input type="text" name="descricao" formControlName="descricao" [(ngModel)]="bookModel.descricao"></ion-input>
               </ion-item>
               <p *ngIf="submitAttemp && !createBookFrmGroup.controls.descricao.valid" class="message-invalid">Informe a Descrição corretamente</p>
-
-              <ion-item>
-                <ion-label>Quantidade de Exemplares:</ion-label>
-                <ion-input type="number" name="quantidadeDeExemplares" formControlName="quantidadeDeExemplares" [(ngModel)]="bookModel.quantidadeDeExemplares"></ion-input>
-              </ion-item>
-              <p *ngIf="submitAttemp && !createBookFrmGroup.controls.quantidadeDeExemplares.valid" class="message-invalid">Informe a Quantidade corretamente</p>
 
               <ion-item>
                 <ion-label>Autor:</ion-label>

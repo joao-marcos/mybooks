@@ -24,7 +24,6 @@ export class UsuarioServiceProvider {
       nome: usuario.nome,
       email: usuario.email,
       senha: usuario.senha,
-      telefone: usuario.telefone,
       instituicao_id: usuario.instituicao_id,
       curso_id: usuario.curso_id
     };

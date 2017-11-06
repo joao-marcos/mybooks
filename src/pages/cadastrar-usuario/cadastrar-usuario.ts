@@ -45,7 +45,6 @@ export class CadastrarUsuarioPage extends BasePage{
     this.userModel = new UserModel();
     this.cadUserFrmGroup = formBuilder.group({
       nome: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      telefone: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       senha: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       instituicao: ['', Validators.compose([Validators.required])],

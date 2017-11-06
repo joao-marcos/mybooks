@@ -41,7 +41,6 @@ export class ModalCreateBookPage extends BasePage{
         editora: ['', Validators.compose([Validators.required, Validators.maxLength(45)])],
         dataDaPublicacao: ['', Validators.compose([Validators.required])],
         descricao: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
-        quantidadeDeExemplares: ['', Validators.compose([Validators.required])],
         autor: ['', Validators.required],
         disponivelParaEmprestimo: ['', Validators.compose([Validators.required])],
       });
@@ -54,6 +53,10 @@ export class ModalCreateBookPage extends BasePage{
   createBook(){
     this.submitAttemp = true;
     
+    if(!this.imageThumb){
+      return;
+    }
+
     if(!this.createBookFrmGroup.valid){
       return;
     }
@@ -133,10 +136,6 @@ export class ModalCreateBookPage extends BasePage{
 
   closeModal(){
     this.viewCtrl.dismiss();
-  }
-
-  fileUpload(){
-
   }
 
 }

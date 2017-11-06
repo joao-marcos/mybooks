@@ -1,17 +1,59 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar color="primary">
+    
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" *ngIf="!showSearch" (click)="showSearchbar()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+      <button ion-button icon-only color="royal" *ngIf="showSearch" (click)="hideSearchbar()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+    </ion-buttons>
+    
     <ion-title>
       Buscar Livros
     </ion-title>
-  </ion-navbar>
+
+    <ion-searchbar
+      *ngIf="showSearch"
+      [(ngModel)]="searchTerm"
+      placeholder="Informe o termo de pesquisa"
+      (ionInput)="searchBooks($event)">
+    </ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+  <ion-grid>
+    <ion-card *ngFor="let book of books">
+      <img src="{{book.thumb}}"/>
+  
+      <ion-card-content>
+        <ion-card-title>
+          {{book.titulo}}
+        </ion-card-title>
+        <p>
+          {{book.descricao}}
+        </p>
+        <p>{{book.autor}}</p>
+      </ion-card-content>
+  
+      <ion-row no-padding>
+        <ion-col>
+          <button ion-button clear small color="primary" icon-start>
+            <ion-icon name='eye'></ion-icon>
+            Ver
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button clear small color="secondary" icon-start>
+            <ion-icon name='swap'></ion-icon>
+            Solicitar Empréstimo
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+  </ion-grid>
+
 </ion-content>

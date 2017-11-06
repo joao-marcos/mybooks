@@ -58,13 +58,13 @@ export class LoginPage extends BasePage{
       error => {
         this.hideLoading();
         let response = JSON.parse(error._body);
-        this.showAlert('Erro login', error);
+        //this.showAlert('Erro login', error);
         for(var key in response.errors){
            let errorText =  response.errors[key].join(' ');
            this.showAlert(response.message, errorText);
         }
       }
-    )
+    );
 
   }
 

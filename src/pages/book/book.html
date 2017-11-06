@@ -8,12 +8,39 @@
 
 <ion-content padding>
   <ion-grid>
-    
-    <ion-row>
-      <ion-fab right bottom>
-          <button ion-fab color="danger" (click)="openModalCreateBook()" ><ion-icon name="add"></ion-icon></button>
-      </ion-fab>
-    </ion-row>
+    <ion-card *ngFor="let book of books">
+      <img src="{{book.thumb}}"/>
+  
+      <ion-card-content>
+        <ion-card-title>
+          {{book.titulo}}
+        </ion-card-title>
+        <p>
+          {{book.descricao}}
+        </p>
+        <p>{{book.autor}}</p>
+      </ion-card-content>
+  
+      <ion-row no-padding>
+        <ion-col>
+          <button ion-button clear small color="primary" icon-start>
+            <ion-icon name='eye'></ion-icon>
+            Vizualizar
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button ion-button clear small color="danger" (click)="confirmDeleteBook(book)" icon-start>
+            <ion-icon name='trash'></ion-icon>
+            Apagar
+          </button>
+        </ion-col>
+      </ion-row>
 
+    </ion-card>
   </ion-grid>
+
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="openModalCreateBook()" ><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
 </ion-content>
