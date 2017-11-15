@@ -1,12 +1,30 @@
 page-login {
     
     ion-grid{
-        padding-top: 30vw !important;
+        padding-top: 3vw !important;
+    }
+
+    ion-content{
+        background-color: #fc9035 !important;
+    }
+
+    .item.item-input {
+        background-color: transparent;
+    }
+    
+
+    .logo-col{
+        text-align: center;
+    }
+
+    .logo-img{
+        width: 45vw;
+        height: auto;
     }
 
     .login-box{
-        padding: 10px 10px 0px 10px;
-        margin-top: 30px;
+        background-color: #fc9035;
+        padding: 1px 1px 0px 10px;
         width: 90%;
         text-align: center;
         align-items: center;

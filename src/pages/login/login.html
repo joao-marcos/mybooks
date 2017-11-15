@@ -15,6 +15,12 @@
 
 <ion-content padding>
   <ion-grid>
+
+      <ion-row>
+        <ion-col col-12 class="logo-col">
+          <img src="assets/img/icon.png" class="logo-img">
+        </ion-col>
+      </ion-row>
     
     <ion-row>
       <ion-col col-12>
@@ -44,7 +50,7 @@
 
             <ion-row>
               <ion-col>
-                <button type="submit" ion-button full icon-left color="secondary">
+                <button type="submit" ion-button full icon-left color="secondary" clear large>
                   <ion-icon name="log-in"></ion-icon>
                   Entrar
                 </button>
@@ -55,7 +61,7 @@
           
           <ion-row>
             <ion-col>
-              <button ion-button full icon-left color="primary" (click)="cadastrarUsuario()">
+              <button ion-button full icon-left color="primary" (click)="cadastrarUsuario()" clear large>
                 <ion-icon name="person-add"></ion-icon>
                 Cadastrar-se
               </button>
