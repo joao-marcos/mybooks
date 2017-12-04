@@ -9,7 +9,6 @@ import { Observable } from 'rxjs/Observable';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 
-
 /*
   Generated class for the LivroServiceProvider provider.
 
@@ -22,8 +21,6 @@ export class LivroServiceProvider {
   token: string;
 
   constructor(public http: Http, private nativeStorage: NativeStorage, private transfer: FileTransfer) {
-    console.log('Hello LivroServiceProvider Provider');
-
     this.nativeStorage.getItem('token_autenticacao')
     .then(
       data => this.token = data.token,
@@ -125,7 +122,11 @@ export class LivroServiceProvider {
     });
   }
 
-  searchBooks(): Observable<BookModel[]>{
+  searchBooks(titulo: string): Observable<BookModel[]>{
+    let requestBody = {
+      titulo: titulo
+    };
+
     let tokenObservable = Observable.fromPromise(
       this.nativeStorage.getItem('token_autenticacao')
       .then(
@@ -138,7 +139,7 @@ export class LivroServiceProvider {
       let headers = new Headers();
       headers.set('Authorization', token);
   
-      return this.http.post(MyBooksConsts.BASE_URL + MyBooksConsts.BOOK.SEARCH, {}, {headers: headers})
+      return this.http.post(MyBooksConsts.BASE_URL + MyBooksConsts.BOOK.SEARCH, requestBody, {headers: headers})
       .map(
         (data) => {
           let responseBooks = data.json();

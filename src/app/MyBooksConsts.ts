@@ -22,4 +22,8 @@ export class MyBooksConsts{
         UPLOAD_THUMB: 'livro/upload-thumb',
         GET_USER: 'livro/usuario'
     }
+
+    static readonly LOAN = {
+        ALL: 'emprestimo'
+    }
 }

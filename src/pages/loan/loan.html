@@ -7,12 +7,53 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>loan</ion-title>
+    <ion-title>Empréstimos</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+  <ion-grid>
+    <ion-card *ngFor="let loan of loans">
+      <img src="{{loan.thumb}}"/>
+  
+      <ion-card-content>
+        <ion-card-title>
+          {{loan.titulo}}
+        </ion-card-title>
+        <p>
+          <b>Solicitante: </b>{{loan.usuarioSolicitante}}
+        </p>
+        <p>
+          <b>Previsão Devolução: </b>{{loan.previsaoDevolucao}}
+        </p>
+        <p>
+          <b>Status: </b>{{loan.status}}
+        </p>
+      </ion-card-content>
+  
+      <ion-row no-padding *ngIf="loan.tipo == 'solicitado'">
+        <ion-col *ngIf="loan.status == 'Pendente'">
+          <button ion-button clear small (click)="updateLoan(loan.id, 'Aprovado')" color="secondary" icon-start>
+            <ion-icon name='checkmark'></ion-icon>
+            Aprovar
+          </button>
+        </ion-col>
+        <ion-col text-center *ngIf="loan.status == 'Pendente'">
+          <button ion-button clear small (click)="updateLoan(loan.id, 'Recusado')" color="danger" icon-start>
+            <ion-icon name='close'></ion-icon>
+            Recusar
+          </button>
+        </ion-col>
+        <ion-col text-center *ngIf="loan.status == 'Aprovado'">
+          <button ion-button clear small (click)="updateLoan(loan.id, 'Encerrado')" color="primary" icon-start>
+            <ion-icon name='checkmark-circle'></ion-icon>
+            Encerrar
+          </button>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+  </ion-grid>
 
 </ion-content>

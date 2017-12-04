@@ -24,6 +24,7 @@ import { CursoServiceProvider } from '../providers/curso-service/curso-service';
 import { AutenticacaoServiceProvider } from '../providers/autenticacao-service/autenticacao-service';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { LivroServiceProvider } from '../providers/livro-service/livro-service';
+import { EmprestimoServiceProvider } from '../providers/emprestimo-service/emprestimo-service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,9 @@ import { LivroServiceProvider } from '../providers/livro-service/livro-service';
     LivroServiceProvider,
     LivroServiceProvider,
     Camera,
-    FileTransfer
+    FileTransfer,
+    EmprestimoServiceProvider,
+    EmprestimoServiceProvider
   ]
 })
 export class AppModule {}

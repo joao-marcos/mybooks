@@ -3,6 +3,7 @@ import { NavController, LoadingController, AlertController, ToastController } fr
 import { BasePage } from '../../estruturaBase/BasePage';
 import { BookModel } from '../../models/BookModel';
 import { LivroServiceProvider } from '../../providers/livro-service/livro-service';
+import { EmprestimoServiceProvider } from '../../providers/emprestimo-service/emprestimo-service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class SearchPage extends BasePage{
     public loadingCtrl: LoadingController,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
-    public bookService: LivroServiceProvider
+    public bookService: LivroServiceProvider,
+    public loanService: EmprestimoServiceProvider
   ) {
     super(loadingCtrl, alertCtrl, toastCtrl);
 
@@ -35,12 +37,61 @@ export class SearchPage extends BasePage{
     this.showSearch = false;
   }
 
+  solicitarEmprestimo(idLivro){
+    let confirm = this.alertCtrl.create({
+      title: 'Solicitar Empréstimo',
+      message: "Informe a data de Devolução",
+      inputs: [
+        {
+          name: 'dt_devolucao',
+          placeholder: 'Devolução',
+          type: 'date'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Solicitar',
+          handler: data => {
+            this.showLoading('Carregando...');
+            
+            this.loanService.cadastrarEmprestimo(idLivro, data.dt_devolucao).subscribe(resp => {
+              this.hideLoading();
+              this.showToast('Empréstimo solicitado com sucesso!');
+            }, error => {
+              this.hideLoading();
+              let response = JSON.parse(error._body);
+        
+              if(response.message){
+                this.showAlert('Erro', response.message);
+              }
+        
+              for(var key in response.errors){
+                  let errorText =  response.errors[key].join(' ');
+                  this.showAlert(response.message, errorText);
+              }
+            });
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
   searchBooks(ev){
+    let search = ev.target.value;
+    
+    if(search == '')
+      return;
+    
     this.showLoading('Carregando...');
 
-    let search = ev.target.value;
-
-    this.bookService.searchBooks().subscribe(
+    this.bookService.searchBooks(search).subscribe(
       data => {
         this.hideLoading();
         this.books = data;
